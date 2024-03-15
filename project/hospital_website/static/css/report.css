@@ -1,0 +1,48 @@
+
+
+.report_content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width:540px) {
+
+    .subject_title{
+        font-size: 18px;
+    }
+    .image_item img{
+        width:340px;
+    }
+    .main_subject {
+        display: flex;
+        margin: 100px 10px;
+    }
+    .text_item {
+        line-height: 1.7;
+        font-size: 16px;
+        padding: 40px 20px;
+        text-align: end;
+    }
+}
+
+@media screen and (max-width:950px) and (min-width:540px){
+
+    .subject_title{
+        font-size: 22px;
+    }
+    .image_item img{
+        width: 740px;
+    }
+    .main_subject {
+        display: flex;
+        margin: 100px 10px;
+    }
+    .text_item {
+        line-height: 1.7;
+        font-size: 16px;
+        padding: 40px 80px;
+        text-align: end;
+    }
+}

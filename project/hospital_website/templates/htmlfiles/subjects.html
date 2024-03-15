@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} المواضيع{% endblock %}
+{% block content %}
+
+
+
+<!-- start subject -->
+
+
+<div class="main_subject">
+
+  
+    <div class="subject_content">
+        <div class="subject_title">{{ object1.title}} </div>
+    
+        <div class="image_item">
+            <img src="{{object.main_image.url}}"  alt="">
+        </div>
+
+
+     
+        {% autoescape off %}
+         {{content}}
+    {% endautoescape %}
+       
+    </div>
+  
+
+
+    <div class="subject_menu">
+        <div class="menu_title m_item">المرضى و الزوار</div>
+        
+        {% for subject in sub_subjects %}
+        <a class="m_item" href="https://www.google.com">{{subject.title}}</a>
+        {% endfor %}
+      
+    </div>
+
+
+
+</div>
+
+
+
+<!-- end subject -->
+
+
+
+{% endblock %}
