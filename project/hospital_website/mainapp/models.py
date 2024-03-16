@@ -24,7 +24,12 @@ class Subject(models.Model):
             return "hospital_services"
         elif self.main_title == "حول المستشفى":
             return "about_hospital"
+        
+    #to check what type of model is inside html template language
+    def return_type(self):
+        return "subject"
     
+
     def __str__(self):
         return self.title
 
@@ -42,8 +47,10 @@ class report(models.Model):
     report_content=models.TextField(default=" ")
     image=models.ImageField(upload_to="images/reports/")
     created=models.DateTimeField(auto_now=True,blank=True)
-    
 
+    #to check what type of model is inside html template language
+    def return_type(self):
+        return "report"
 
     def __str__(self):
         return self.title

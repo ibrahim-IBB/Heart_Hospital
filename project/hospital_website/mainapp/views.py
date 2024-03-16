@@ -2,7 +2,7 @@ from django.shortcuts import render
 from bs4 import BeautifulSoup
 from django.core.paginator import Paginator
 from django.http import Http404
-
+from itertools import chain
 # Create your views here.
 from .models import Subject
 from .models import report
@@ -199,7 +199,10 @@ def search(request):
 
     if request.method == 'GET':
         search_data=request.GET["search"]
-        result=Subject.objects.filter(title__icontains=search_data)
+        result_subject=Subject.objects.filter(title__icontains=search_data)
+        result_report=report.objects.filter(title__icontains=search_data)
+        result=chain(result_subject,result_report)
+        print(result_report)
         #print(result[0].sub_subjects_set.all()[0].main_title_en())
     else:
         result="False"
