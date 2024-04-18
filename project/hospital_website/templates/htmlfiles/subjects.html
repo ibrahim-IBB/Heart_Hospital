@@ -16,7 +16,9 @@
         <div class="subject_title">{{ object1.title}} </div>
     
         <div class="image_item">
+            {% if object.image %}
             <img src="{{object.main_image.url}}"  alt="">
+            {% endif %}
         </div>
 
 

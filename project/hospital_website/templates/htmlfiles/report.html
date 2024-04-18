@@ -17,7 +17,10 @@
         <div class="subject_title">{{ report.title}}</div>
     
         <div class="image_item">
+            {% if report.image %}
             <img src="{{report.image.url}}" alt="">
+            {%endif %}
+          
         </div>
 
         <div class="text_item">

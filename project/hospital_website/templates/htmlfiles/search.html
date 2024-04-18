@@ -22,7 +22,7 @@
     <div class="search_item"><a href="/{{search_result.main_title_en}}/"> {{search_result.title}} </a></div>
 
     {% else%}
-    <div class="search_item"><a href="/{{search_result.sub_subjects_set.all.0.main_title_en}}/{{search_result.id}}/"> {{search_result.title}} </a></div>
+    <div class="search_item"><a href="/subject/{{search_result.id}}/"> {{search_result.title}} </a></div>
 
     {% endif %}
 

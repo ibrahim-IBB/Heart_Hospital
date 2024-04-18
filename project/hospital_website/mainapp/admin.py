@@ -13,7 +13,7 @@ class IngredientInline1(admin.TabularInline):
 
 @admin.register(Subject)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('title','main_title','id')
+    list_display = ('title','main_title','id',"get_parent")
     search_fields = ('title', )
     formfield_overrides = {
         models.ManyToManyField: {
@@ -21,6 +21,14 @@ class RecipeAdmin(admin.ModelAdmin):
         },
     }
     inlines = [IngredientInline1]
+
+    def get_parent(self,obj):
+
+        if obj.sub_subjects is not None:
+            return obj.sub_subjects.title
+        else:
+            return "free"
+    get_parent.short_description = 'get_parent'
 
 admin.site.register(report)
 

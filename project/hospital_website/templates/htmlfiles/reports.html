@@ -21,7 +21,9 @@
      
     {% for report in reports %}
     <div class="news_card">
+      {% if report.image %}
         <img src="{{report.image.url}}"  alt="">
+        {% endif %}
         <div>
            
            {{report.report_content|truncatechars:300 }} 
