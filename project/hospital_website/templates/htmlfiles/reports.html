@@ -50,7 +50,6 @@
 
 <!-- start pagination -->
 
-  
 <!--Active and Hoverable Pagination-->
 <div class="page-header">Active and Hoverable Pagination</div>
 <ul id="pagination">
@@ -62,6 +61,8 @@
 
     {% if reports.number == i %}
     <li><a href="/reports/{{i}}/" class="active" >{{i}}</a></li>
+    {% elif i ==  paginator.ELLIPSIS %}
+    <li>{{ paginator.ELLIPSIS}}</li>
     {% else %}
     <li><a href="/reports/{{i}}/"  >{{i}}</a></li>
     {% endif %}

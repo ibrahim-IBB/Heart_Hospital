@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import Subject,subject_image,report
+from .models import Subject,subject_image,report,Profile
 
 # Register your models here.
 
@@ -31,5 +31,5 @@ class RecipeAdmin(admin.ModelAdmin):
     get_parent.short_description = 'get_parent'
 
 admin.site.register(report)
-
+admin.site.register(Profile)
 

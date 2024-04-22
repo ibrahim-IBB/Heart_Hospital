@@ -48,7 +48,12 @@
 
     <div class="text">
         {% autoescape off %}
-{{item.report_content}} 
+        {% if item.image %}
+        {{item.report_content|truncatechars:255 }} 
+        {% else %}
+        {{item.report_content|truncatechars:960 }} 
+        {% endif %}
+
 {% endautoescape %}
     </div>
 
@@ -77,7 +82,7 @@
     <a href="/report/{{first_report.id}}/"><div class="title">{{first_report.title}}</div></a>
     <div class="content">
         {% autoescape off %}
-{{first_report.report_content}}
+{{first_report.report_content|truncatechars:965}}
 {% endautoescape %}
     </div>
 

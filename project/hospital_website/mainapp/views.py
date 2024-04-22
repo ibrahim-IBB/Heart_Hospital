@@ -1,12 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.core.exceptions import ValidationError
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from bs4 import BeautifulSoup
 from django.core.paginator import Paginator
 from django.http import Http404
 from itertools import chain
 # Create your views here.
-from .models import Subject
-from .models import report
-
+from .models import Subject,report,Profile
+from .froms import SignUpForm 
 
 
 
@@ -190,18 +193,20 @@ def global_subject(request,subject_id=None):
 def reports(request,page):
 
     
-    paginator=Paginator(report.objects.all(),2)
+    paginator=Paginator(report.objects.all(),5)
     
     reports=paginator.get_page(page)
-
-
+    
+    #reports=paginator.get_elided_page_range(number=page)
+   
 
     
     context={
         "reports":reports,
-        "page_number":range(1,reports.paginator.num_pages+1),
+        "page_number":paginator.get_elided_page_range(number=page,on_each_side=1,on_ends=1),#range(1,reports.paginator.num_pages+1),
         "next":reports.number+1,
-        "previous":reports.number-1
+        "previous":reports.number-1,
+        "paginator":paginator,
         
     }
 
@@ -303,4 +308,75 @@ def subject_list(request):
 
     all_subjects=Subject.objects.all()
 
-    return render(request,"htmlFiles/admin/subject_list.html",context={"subjects":all_subjects})
+    return render(request,"htmlFiles/admin/subject_list.html",context={"subjects":all_subjects})\
+    
+
+
+
+
+
+
+def signup(request):
+    if request.method=="POST":
+        form=SignUpForm(request.POST)
+
+        if form.is_valid():
+
+            user=form.save()
+            profile=Profile.objects.create(user=user)
+            profile.save()
+            login(request,user)
+
+            return redirect("main")
+    
+    else:
+        form=SignUpForm()
+    
+    return render(request,"htmlFiles/signup.html",{"form":form})
+
+
+
+@login_required
+def profile(request):
+
+    if request.method=="POST":
+        if "img" in request.POST:
+            data=request.FILES["profile_image"]
+            profile=request.user.profile
+            profile.image=data
+            profile.save()
+
+        if "user_name" in request.POST:
+            data=request.POST["username"]
+            if User.objects.filter(username=data).exists():
+                raise ValidationError('This username already exists')
+            else:
+
+                request.user.username=data
+                request.user.save()
+
+        if "phone" in request.POST:
+
+            data=request.POST["phone_number"]
+
+            profile=request.user.profile
+            profile.phone_number=data
+            profile.save()
+
+        if "birth_date" in request.POST:
+
+            data=request.POST["birth"]
+
+            profile=request.user.profile
+            profile.birthdate=data
+            profile.save()
+
+
+
+       
+    else:
+        return render(request,"htmlFiles/profile.html")
+    return render(request,"htmlFiles/profile.html")
+
+
+    

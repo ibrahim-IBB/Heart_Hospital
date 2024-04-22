@@ -21,11 +21,13 @@
             {% endif %}
         </div>
 
-
+        <div class="text_item">
+            {% autoescape off %}
+            {{content}}
+       {% endautoescape %}
+         </div>
      
-        {% autoescape off %}
-         {{content}}
-    {% endautoescape %}
+   
        
     </div>
   

@@ -27,12 +27,15 @@ SECRET_KEY = 'django-insecure-6f85c@61%!=wi0bts-2qu8ps!&5xrwsm2(1u99n(d1b%k2)l@(
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.mysite.com']
-
+LOGOUT_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL='/'
+LOGIN_URL ="login/"
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
    'sorl.thumbnail',
     'mainapp',
+    
 ]
 
 MIDDLEWARE = [
@@ -72,7 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hospital_website.wsgi.application'
-
+ASGI_APPLICATION ='hospital_website.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

@@ -1,8 +1,12 @@
 from django.db import models
-from django.utils import timezone
+""" from django.utils import timezone
 from sorl.thumbnail import get_thumbnail
-from django.utils.html import format_html
+from django.utils.html import format_html """
+from django.conf import settings
+from django.core.validators import RegexValidator
+
 # Create your models here.
+
 
 
 class Subject(models.Model):
@@ -59,3 +63,19 @@ class Testing(models.Model):
     def __str__(self):
         return self.name
     
+
+
+class Profile(models.Model):
+    user=models.OneToOneField( settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    image=models.ImageField(default="/profile_pics/default.jpg",upload_to="profile_pics")
+
+
+    phone_number = models.CharField(max_length=60,
+                             null=True, blank=True)
+    
+    birthdate=models.DateField(blank=True,null=True)
+
+
+
+    def __str__(self):
+        return f"{self.user.username} Profile"

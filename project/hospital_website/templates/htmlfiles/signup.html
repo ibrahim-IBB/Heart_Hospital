@@ -1,0 +1,50 @@
+{% load static %}
+
+
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login_and_register.css' %}" />
+    <title>Login template</title>
+  </head>
+
+  <body>
+    <div class="limiter">
+      <div class="containter">
+        <div class="wraper">
+            <form class="validate-form" method="post" action=".">
+                {% csrf_token %}
+                <span class="login-form-title p-b-26">Welcome</span>
+    
+                <div class="wrap-input">
+           
+                  <input type="text" name="username" id="username" class="input" placeholder="username">
+                
+                </div>
+                <div class="wrap-input m-b-15">
+                    <input type="password" name="password1" id="password" class="input" placeholder="password1">
+                 
+                </div>
+                <div class="wrap-input m-b-15">
+                    <input type="password" name="password2" id="password" class="input" placeholder="password2">
+                 
+                </div>
+                <input type="submit" value="تسجيل" class="login-form-button">
+                
+                {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                <div>{{error|escape}}</div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+              </form>
+          <div class="signup-link">
+            <span >تمتلك  حساب؟ <a href="{% url 'login' %}">login</a></span>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
