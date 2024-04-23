@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+
+import channels.layers
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 print(BASE_DIR)
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
    'sorl.thumbnail',
     'mainapp',
+    'chat',
     
 ]
 
@@ -75,8 +78,27 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'hospital_website.wsgi.application'
+
 ASGI_APPLICATION ='hospital_website.asgi.application'
+
+
+
+""" CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 8000)],
+        },
+    },
+} """
+import channels
+
+CHANNEL_LAYERS = {
+    "default":{
+        "BACKEND":"channels.layers.InMemoryChannelLayer"
+    }
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

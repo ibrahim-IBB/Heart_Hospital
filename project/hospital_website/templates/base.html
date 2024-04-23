@@ -48,22 +48,27 @@
                 <!-- show account-->
                 <div class="action">
                     <div class="profile" onclick="menuToggle();">
+                      {% if user.profile.image %}
                       <img src="{{user.profile.image.url}}" />
+                      {% else %}
+                      <img src="/profile_pics/default.jpg/" />
+                      {% endif %}
+                     
                     </div>
                     <div class="menu">
                       <h3>{{request.user.username}}</h3>
                       <ul>
                         <li>
-                          <img src="{% static 'source/images/MainLogo.png' %}" /><a href="{% url 'profile' %}">profile</a>
+                         <a href="{% url 'profile' %}">profile</a>
                         </li>
                        
                         <li>
-                          <img src="{% static 'source/images/MainLogo.png' %}" /><a href="#">رسائل</a>
+                          <a href="{% url 'base_chat' %}">رسائل</a>
                         </li>
                       
                        
                         <li>
-                          <img src="{% static 'source/images/MainLogo.png' %}" /><form action="{% url 'logout' %}" method="post">
+                        <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %} 
                             <button class="arabic">خروج</button>
                         </form>

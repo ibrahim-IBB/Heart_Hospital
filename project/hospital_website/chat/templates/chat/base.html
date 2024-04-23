@@ -1,0 +1,84 @@
+
+    
+
+    
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{active_room.name}} {% endblock %}
+
+
+{% block css_link %}
+<link rel="stylesheet"  href="{% static 'css/room.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+  
+<div class="chat-container">
+    <div class="channels">
+      <!-- List of channels goes here -->
+      {% for room in rooms %}
+      <div class="channel-item">{{room.name}}</div>
+      {% endfor %}
+     
+    </div>
+    <div class="active-channel">
+      <div class="messages">
+        <!-- List of messages goes here -->
+        <div class="message my-message">Me: This is a message that I wrote. It should appear on the right side.</div>
+        <div class="message other-message">User2: This is a message from another user. It should appear on the left side.</div>
+     
+      </div>
+      <form class="input-text" id="send_form">
+        <input type="text" placeholder="Type a message..." id="message_input" >
+        <input type="submit" value="send" id="send_btn">
+      </form>
+    </div>
+  </div>
+{{active_room.slug|json_script:"json-roomname"}}
+{{request.user.username|json_script:"json-username"}}
+{% if active_room %}
+<script>
+console.log("script loaded");
+  const roomName=JSON.parse(document.getElementById("json-roomname").textContent)
+  const username=JSON.parse(document.getElementById("json-username").textContent)
+ const chatSocket=new WebSocket(
+  'ws://'
+  +window.location.host
+  +'/ws/'
+  +roomName
+  +'/'
+ )
+
+ chatSocket.onmessage=function(e){
+  console.log("onmessage")
+ }
+ chatSocket.onopen=function(e){
+  console.log("onopen")
+ }
+ chatSocket.onclose=function(e){
+  console.log("onclose")
+ }
+
+//
+const message_input=document.getElementById("message_input");
+const send_form=document.getElementById("send_form");
+send_form.addEventListener("submit",function(e){
+  e.preventDefault();
+  chatSocket.send(JSON.stringify({
+    "username":username,
+    "message":message_input.value,
+    "room":roomName
+  }))
+send_form.reset();
+})
+
+</script>
+{% endif %}
+ 
+
+{% endblock %}
