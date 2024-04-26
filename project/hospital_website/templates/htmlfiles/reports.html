@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} الاخبار {% endblock %}
+{% block content %}
+
+ 
+
+    <!--start title-->
+
+    <div class="news_title">أخبار</div>
+
+    <!--end title-->
+
+<!-- start news -->
+
+
+<div class="news_container">
+
+   
+     
+    {% for report in reports %}
+    <div class="news_card">
+      {% if report.image %}
+        <img src="{{report.image.url}}"  alt="">
+        {% endif %}
+        <div>
+           
+           {{report.report_content|truncatechars:300 }} 
+        </div>
+        <a href="/report/{{report.id}}/">{{report.title}} </a>
+    </div>
+   {% endfor %}
+   
+
+   
+</div>
+
+
+
+</div>
+
+  
+
+
+<!-- end news -->
+
+
+
+
+<!-- start pagination -->
+
+<!--Active and Hoverable Pagination-->
+<div class="page-header">Active and Hoverable Pagination</div>
+<ul id="pagination">
+    {% if reports.has_previous %}
+  <li><a class="" href="/reports/{{previous}}/">»</a></li>
+  {% endif %}
+
+  {% for i in page_number %}
+
+    {% if reports.number == i %}
+    <li><a href="/reports/{{i}}/" class="active" >{{i}}</a></li>
+    {% elif i ==  paginator.ELLIPSIS %}
+    <li>{{ paginator.ELLIPSIS}}</li>
+    {% else %}
+    <li><a href="/reports/{{i}}/"  >{{i}}</a></li>
+    {% endif %}
+ 
+
+  {% endfor %}
+<!--   <li><a href="#">1</a></li>
+  <li><a href="#" class="active">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">6</a></li>
+  <li><a href="#">7</a></li> -->
+  {% if reports.has_next %}
+  <li><a href="/reports/{{next}}/"> «</a></li>
+  {%endif%}
+  
+</ul> 
+
+
+<!-- end pagination -->
+
+{% endblock %}

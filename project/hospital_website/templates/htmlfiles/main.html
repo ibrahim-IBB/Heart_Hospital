@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} الصفحة الرئيسية {% endblock %}
+{% block content %}
+  <!-- image slider-->
+
+  <div class="image_slider">
+    <div class="swiper">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide"><img src="{% static 'source/images/Image_Editor(1).png' %}" alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'source/images/Image_Editor.png' %}"  alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'source/images/Image_Editor(2).png' %}"  alt=""></div>
+            <div class="swiper-slide"><img src="{% static 'source/images/Image_Editor(2).png' %}"  alt=""></div>
+          
+   
+        </div>
+        <div class="swiper-pagination"></div>
+      
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      
+    
+      </div>
+</div>
+
+<!-- end image slider-->
+
+
+
+
+
+<!-- grid view items-->
+
+<div class="grid_view">
+
+  
+    {% for item in recent_reports %}
+  <!--item with image content-->
+  <div class="grid_view_item   item_image">
+    <div class="over_effect"></div>
+    <a href="/report/{{item.id}}/"><div class="title">{{item.title}}</div></a>
+    {% if item.image %}
+    <div class="content"><img src="{{item.image.url}}" alt=""></div>
+  {% endif %}
+
+    <div class="text">
+        {% autoescape off %}
+        {% if item.image %}
+        {{item.report_content|truncatechars:255 }} 
+        {% else %}
+        {{item.report_content|truncatechars:960 }} 
+        {% endif %}
+
+{% endautoescape %}
+    </div>
+
+</div>
+
+    {% endfor %}
+
+
+
+
+</div>
+
+<!-- end grid view items-->
+
+
+
+<!-- start center item-->
+
+<div class="center_item">
+
+
+<!--item with text content-->
+      
+<div class="grid_view_item   item_card size_2">
+    <div class="over_effect"></div>
+    <a href="/report/{{first_report.id}}/"><div class="title">{{first_report.title}}</div></a>
+    <div class="content">
+        {% autoescape off %}
+{{first_report.report_content|truncatechars:965}}
+{% endautoescape %}
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- end center item-->
+
+
+
+
+{% endblock %}

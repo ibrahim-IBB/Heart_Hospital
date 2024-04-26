@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css links-->
+    
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"   href="{% static 'css/normal.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/style.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/subjects.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/report.css' %}">
+    <link rel="stylesheet"  href="{% static 'css/search.css' %}">
+    {% block css_link %}
+ 
+    {% endblock %}
+    <!-- all fonts-->
+ 
+
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+
+    <title>{% block title %} {% endblock %} </title>
+</head>
+<body>
+
+
+    <!-- header navbar-->
+    <header class="navbar_header">
+        
+     
+          <!-- english and arabic website buttons-->
+
+          <div class="arabic_english_container">
+         
+            {% if request.user.is_authenticated %}
+                <!-- show account-->
+                <div class="action">
+                    <div class="profile" onclick="menuToggle();">
+                      {% if user.profile.image %}
+                      <img src="{{user.profile.image.url}}" />
+                      {% else %}
+                      <img src="/profile_pics/default.jpg/" />
+                      {% endif %}
+                     
+                    </div>
+                    <div class="menu">
+                      <h3>{{request.user.username}}</h3>
+                      <ul>
+                        <li>
+                         <a href="{% url 'profile' %}">profile</a>
+                        </li>
+                       
+                        <li>
+                          <a href="{% url 'base_chat' %}">رسائل</a>
+                        </li>
+                      
+                       
+                        <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %} 
+                            <button class="arabic">خروج</button>
+                        </form>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+     
+            {% else %}
+            <button class="arabic"><a href="{% url 'login' %}">دخول</a></button>
+            <button class="english"><a href="{% url 'signup' %}">تسجيل</a></button>
+            {% endif %}
+            
+       
+        </div>
+
+   <!-- sign in button-->
+
+<!--    <div class="sign_in">
+    <button class="sign_in_button">دخول</button>
+</div>
+ -->
+
+    <!--search input-->
+        <form class="search_form" method="GET"  action="/search_result/">
+            <input  class="search_input" type="text" name="search"  >
+            <button class="search_submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
+            <!-- <div class="line"></div> -->
+        </form>
+
+        <!-- website logo-->
+        <div class="logo_container">
+            <img  class="logo_img" src="{% static 'source/images/MainLogo.png' %}" alt="logo">
+        </div>
+    </header>
+
+    <!-- second navbar-->
+<div class="second_navbar_container">
+    <header class="second_navbar">
+            <a class="subject" href="/" id="main">الرئيسية</a>
+            <a class="subject" href="/about_hospital/">حول المستشفى</a>
+            <a class="subject" href="/hospital_services/">خدمات المستشفى</a>
+            <a class="subject" href="/patients_and_visitors/">المرضى و الزوار</a>
+            <a class="subject" href="/reports/1/">اخر الاخبار</a>
+            <a class="subject" href="/contact_info/">للأتصال بنا</a>
+        </header>
+    </div>
+    <!--end second navbar-->
+
+
+    {% block content %}
+    {% endblock %}
+
+    <!--footer-->
+
+    <div class="footer">
+ <!-- part one-->
+        <div class="part">
+            <div class="part_item">
+               
+                <span id="part_two">احدث الاخبار و الفعاليات</span>
+               
+            </div>
+
+
+            <div class="part_item news">
+               
+               <a href="https://www.google.com"> <span>رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="part_item news">
+                
+             <a href="https://www.google.com"> <span>رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="part_item news">
+                
+              <a href="https://www.google.com">  <span> رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="part_item news">
+              
+               <a href="https://www.google.com"><span>رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+         
+           
+
+
+        </div>
+
+
+        
+ <!-- part two-->
+        <div class="part">
+            <div class="part_item">
+               
+                 <span id="part_two">احدث المشاركات على  الفيسبوك</span>
+               
+            </div>
+
+
+            <div class="part_item news">
+               
+               <a href="https://www.google.com"><span>رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="part_item news">
+                
+                <a href="https://www.google.com"><span>رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="part_item news">
+                
+                <a href="https://www.google.com">  <span> رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="part_item news">
+              
+                <a href="https://www.google.com"> <span>رابط المنشور</span></a>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+         
+           
+
+
+        </div>
+ <!-- part three-->
+        <div class="part" id="info_part">
+
+            <div style="margin-top:10px"></div>
+            <div class="part_item info" >
+               
+                <span>9-999-999-9999</span>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="part_item info">
+                
+                <span>9-999-999-9999</span>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="part_item info">
+                
+                <span> كيف تصل الينا</span>
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+            </div>
+            <div class="part_item info">
+              
+                <span>hospital@gmail.com</span>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </div>
+         
+           
+
+        </div>
+    </div>
+    <div class="social_media">
+       
+        <a class="social_media_icon" href="www.facebock.com"> 
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+        </a>
+      
+        <a class="social_media_icon" href="www.facebock.com"> 
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+      
+        <a class="social_media_icon" href="www.facebock.com"> 
+            <i class="fa fa-telegram" aria-hidden="true"></i>
+        </a>
+
+        <a class="social_media_icon" href="www.facebock.com"> 
+            <i class="fa fa-youtube-play" aria-hidden="true"></i>
+
+        </a>
+
+    </div>
+    <!--end footer-->
+    <!--javascript libraries-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+
+
+    const swiper = new Swiper('.swiper', {
+      autoplay:{
+        delay:6000
+      },
+
+      speed:700,
+      
+  // Optional parameters
+  loop: true,
+
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+
+});
+
+    </script>
+  <script>
+    function menuToggle() {
+      const toggleMenu = document.querySelector(".menu");
+      toggleMenu.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

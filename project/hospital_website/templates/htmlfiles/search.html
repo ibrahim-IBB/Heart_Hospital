@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} الاخبار {% endblock %}
+{% block content %}
+
+ 
+
+
+
+<!-- start search content -->
+
+<div class="search_item_container">
+
+  <div style="width: 100%; height: 100px;"></div>
+
+  {% for search_result in result %}
+
+  {% if search_result.return_type == 'subject' %}
+
+    {% if search_result.main_title  %}
+    <div class="search_item"><a href="/{{search_result.main_title_en}}/"> {{search_result.title}} </a></div>
+
+    {% else%}
+    <div class="search_item"><a href="/subject/{{search_result.id}}/"> {{search_result.title}} </a></div>
+
+    {% endif %}
+
+    {% else %}
+    <div class="search_item"><a href="/report/{{search_result.id}}/"> {{search_result.title}} </a></div>
+    {% endif %}
+
+  {% endfor %}
+  
+  </div>
+
+ 
+<!-- end search content -->
+
+
+ 
+
+{% endblock %}

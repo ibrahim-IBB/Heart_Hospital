@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} الخبر {% endblock %}
+{% block content %}
+
+
+
+
+<!-- start subject -->
+
+
+<div class="main_subject">
+
+  
+    <div class="report_content">
+        <div class="subject_title">{{ report.title}}</div>
+    
+        <div class="image_item">
+            {% if report.image %}
+            <img src="{{report.image.url}}" alt="">
+            {%endif %}
+          
+        </div>
+
+        <div class="text_item">
+
+
+            {% autoescape off %}
+            {{ report.report_content}}
+             {% endautoescape %}
+      
+                
+           
+
+        </div>
+
+        
+     
+
+      
+
+     
+
+    </div>
+  
+
+
+
+</div>
+
+
+
+<!-- end subject -->
+
+
+
+
+
+{% endblock %}

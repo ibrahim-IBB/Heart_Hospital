@@ -1,0 +1,18 @@
+<h1>{{subject.title}}</h1>
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <select name="free_subjects" multiple>
+        {% for sub in free_subjects %}  
+        
+        <option value="{{sub.id}}">{{sub.title}}</option>
+        
+        {% endfor %}
+        </select>
+
+        <input type="submit" value="set">
+</form>
+<a href="/subject_list/">Subjects List</a>

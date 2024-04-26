@@ -1,0 +1,9 @@
+
+<ul style="padding: 30px;width:60%;height: 30%; margin: 10% auto; overflow: scroll; text-align: center;
+list-style: none;">
+    {% for subject in subjects %}
+    <li style="padding: 10px; margin: 5px;"><a href="/subject_set_parent/{{subject.id}}/">{{subject.title}}  /set</a></li>
+    <li  style="padding: 10px; margin: 5px;"><a href="/subject_parent_remove/{{subject.id}}/">{{subject.title}}  /remove</a></li>
+    <br>
+    {% endfor %}
+</ul>
