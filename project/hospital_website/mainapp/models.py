@@ -3,7 +3,8 @@ from django.db import models
 from sorl.thumbnail import get_thumbnail
 from django.utils.html import format_html """
 from django.conf import settings
-from django.core.validators import RegexValidator
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -36,7 +37,7 @@ class Subject(models.Model):
 
 class subject_image(models.Model):
     subject=models.ForeignKey(Subject,on_delete=models.CASCADE,null=True)
-    image=models.ImageField(upload_to="images/sub_images")
+    image=models.ImageField(upload_to="sub_images/%Y/%m/%d")
 
 
 
@@ -44,7 +45,7 @@ class subject_image(models.Model):
 class report(models.Model):
     title=models.CharField(max_length=250)
     report_content=models.TextField(default=" ")
-    image=models.ImageField(upload_to="images/reports/",null=True,blank=True)
+    image=models.ImageField(upload_to="reports/%Y/%m/%d",null=True,blank=True)
     created=models.DateTimeField(auto_now=True,blank=True)
 
     #to check what type of model is inside html template language
@@ -67,7 +68,7 @@ class Testing(models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField( settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    image=models.ImageField(default="/profile_pics/default.jpg",upload_to="profile_pics")
+    image=models.ImageField(default="/default.jpg",upload_to="profile/%Y/%m/%d")
 
 
     phone_number = models.CharField(max_length=60,
@@ -79,3 +80,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} Profile"
+
+
+class Mail(models.Model):
+    email_reply=models.CharField(max_length=255)
+    subject=models.CharField(max_length=255,null=False,default='')
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    email_body=RichTextUploadingField(null=True,blank=True)
+    user_visible=models.BooleanField(default=True)
+    replied=models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.email_subject

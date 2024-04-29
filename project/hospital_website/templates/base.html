@@ -49,9 +49,9 @@
                 <div class="action">
                     <div class="profile" onclick="menuToggle();">
                       {% if user.profile.image %}
-                      <img src="{{user.profile.image.url}}" />
+                      <img src="{{user.profile.image.url}}" onerror="this.onerror=null;this.src='/default.png/'" />
                       {% else %}
-                      <img src="/profile_pics/default.jpg/" />
+                      <img src="/default.jpg/" />
                       {% endif %}
                      
                     </div>

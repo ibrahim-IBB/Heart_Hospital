@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django import forms
-from .models import Subject,subject_image,report,Profile
+from .models import Subject,subject_image,report,Profile,Mail
 
 # Register your models here.
 
@@ -32,4 +32,5 @@ class RecipeAdmin(admin.ModelAdmin):
 
 admin.site.register(report)
 admin.site.register(Profile)
+admin.site.register(Mail)
 

@@ -1,0 +1,26 @@
+
+    
+
+    
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Email {% endblock %}
+
+
+{% block css_link %}
+
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post" style="display: flex; flex-direction: column;align-items: center; margin: 50px;">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="send">
+</form>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}

@@ -22,7 +22,9 @@
     {% for report in reports %}
     <div class="news_card">
       {% if report.image %}
-        <img src="{{report.image.url}}"  alt="">
+        <img src="{{report.image.url}}" onerror="this.onerror=null;this.src='/default-placeholder.png/'"  alt="">
+        {% else %}
+        <img src="/default-placeholder.png/"  alt="">
         {% endif %}
         <div>
            

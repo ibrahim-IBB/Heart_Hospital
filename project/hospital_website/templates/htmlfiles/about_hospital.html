@@ -15,10 +15,13 @@
     <div class="subject_content">
         <div class="subject_title">{{ object.title}} </div>
     
+        {% if object.main_image %}
         <div class="image_item">
             <img src="{{object.main_image.url}}"  alt="">
         </div>
 
+        {% endif %}
+      
 
      
         <div class="text_item">

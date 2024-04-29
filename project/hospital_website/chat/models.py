@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+
+from django.conf import settings
 # Create your models here.
 
 
@@ -13,7 +15,12 @@ class Room(models.Model):
 
 
 class Message(models.Model):
-    message_text=models.TextField()
-    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    created_date=models.DateTimeField(auto_now_add=True)
-    room=models.SlugField()
+    content=models.TextField()
+    user=models.ForeignKey( settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name="messages")
+    room=models.ForeignKey(Room,on_delete=models.CASCADE,related_name="messages")
+    date_added=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering=('date_added',)
+
+

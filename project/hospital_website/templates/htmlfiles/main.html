@@ -43,8 +43,18 @@
     <div class="over_effect"></div>
     <a href="/report/{{item.id}}/"><div class="title">{{item.title}}</div></a>
     {% if item.image %}
-    <div class="content"><img src="{{item.image.url}}" alt=""></div>
+    <div class="content"><img src="{{item.image.url}}" onerror="this.onerror=null;this.src='/default-placeholder.png/'" alt=""></div>
+
+    {% else %}
+    <div class="content"><img  src="/default-placeholder.png/" alt=""></div>
   {% endif %}
+
+<!--   {% if report.image %}
+  <img src="{{report.image.url}}" onerror="this.onerror=null;this.src='/default-placeholder.png/'"  alt="">
+  {% else %}
+  <img src="/default-placeholder.png/"  alt="">
+  {% endif %}
+  <div> -->
 
     <div class="text">
         {% autoescape off %}
