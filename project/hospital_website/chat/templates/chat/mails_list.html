@@ -1,0 +1,79 @@
+
+    
+
+    
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Email {% endblock %}
+
+
+{% block css_link %}
+<style>
+    :root{
+    --red:#ff7373;
+    --light_red:#fda7a7;
+    --blue:#38B6FF;
+    --gray:#FFEFEF;
+    --darker-blue:#5271FF;
+    --light_blue:#b1e2ff; 
+    --time:0.3s;
+    --mobile_size:480px;
+}
+   .search_item a{
+    font-size: 16px;
+   }
+    .search_item span{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .admin{
+        background-color:var(--light_blue) ;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="empty_fixer"></div>
+
+<!-- start search content -->
+
+<div class="search_item_container">
+
+    <div style="width: 100%; height: 100px;"></div>
+  
+    {% for email in emails %}
+
+    {% if request.user == email.user %}
+    <div class="search_item admin" dir="rtl">
+    {% else %}
+    <div class="search_item " dir="rtl">
+    {% endif %}
+
+    <a href="{% url 'mail_show' email.id %}"> 
+        <span>المستخدم:</span>{{email.user.username}}&ensp;  &ensp;
+        <span>الموضوع:</span>{{email.subject}} &ensp;  &ensp;
+        <span>التاريخ:</span>{{email.created}} &ensp;  &ensp;
+       
+       
+    </a>
+</div>
+
+    {% endfor %}
+    
+    </div>
+  
+   
+
+
+<div class="empty_fixer"></div>
+{% endblock %}
+
+

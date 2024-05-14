@@ -1,9 +1,76 @@
 
-<ul style="padding: 30px;width:60%;height: 30%; margin: 10% auto; overflow: scroll; text-align: center;
-list-style: none;">
-    {% for subject in subjects %}
-    <li style="padding: 10px; margin: 5px;"><a href="/subject_set_parent/{{subject.id}}/">{{subject.title}}  /set</a></li>
-    <li  style="padding: 10px; margin: 5px;"><a href="/subject_parent_remove/{{subject.id}}/">{{subject.title}}  /remove</a></li>
-    <br>
-    {% endfor %}
-</ul>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subject list</title>
+    <style>
+        ul.subjects-list {
+            padding: 30px;
+            width: 60%;
+            height: 30%;
+            margin: 10% auto;
+            overflow: auto;
+            text-align: center;
+            list-style: none;
+            background-color: #f7f7f7; /* Light grey background */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        
+        ul.subjects-list li {
+            padding: 10px;
+            margin: 5px;
+            background-color: #ffffff; /* White background for list items */
+            border: 1px solid #dddddd; /* Light grey border */
+            border-radius: 4px; /* Rounded corners for list items */
+            transition: transform 0.2s ease-in-out; /* Smooth transition for hover effect */
+        }
+        
+        ul.subjects-list li:hover {
+            transform: translateY(-3px); /* Slight raise effect on hover */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+        }
+        
+        ul.subjects-list a {
+            text-decoration: none; /* Remove underline from links */
+            color: #333333; /* Dark grey text color */
+            font-weight: bold; /* Make the text bold */
+        }
+        
+        ul.subjects-list a:hover {
+            color: #0056b3; /* Change link color on hover */
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #337ab7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+           
+        }
+        
+        a:hover {
+            color: #23527c;
+        }
+        </style>
+</head>
+<body>
+    <a href="{% url 'admin:index' %}">admin site</a>
+    <ul class="subjects-list">
+        {% for subject in subjects %}
+        <li><a href="/subject_set_parent/{{subject.id}}/">{{subject.title}} /set</a></li>
+        <li><a href="/subject_parent_remove/{{subject.id}}/">{{subject.title}} /remove</a></li>
+        {% endfor %}
+    </ul>
+  
+</body>
+</html>
+
+    
+ 

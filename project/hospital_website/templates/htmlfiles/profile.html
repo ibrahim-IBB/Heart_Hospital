@@ -36,7 +36,7 @@
                 <input type="hidden" name="img">
                 <input type="submit" value="تأكيد" class="edit-btn">
             </form>
-            <button id="close_button_img">close</button>
+            <button id="close_button_img">اغلاق</button>
         </dialog>
     </div>
   
@@ -49,21 +49,39 @@
             <th>Action</th>
         </tr>
         <tr>
-            <td>Username</td>
-            <td>{{request.user.username}}</td>
+            <td>first name</td>
+            <td>{{request.user.first_name}}</td>
             <td><button class="edit-btn" id="show_button_username">Edit</button></td>
 
             <dialog id="username_dialog">
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input   type="text" name="username" id="username" >
-                    <input type="hidden" name="user_name">
+                    <input   type="text" name="firstname" id="username" >
+                    <input type="hidden" name="first_name">
                     <input type="submit" value="تأكيد" class="edit-btn">
                 </form>
-                <button id="close_button_username">close</button>
+                <button id="close_button_username">اغلاق</button>
             </dialog>
 
         </tr>
+        <tr>
+            <td>last name</td>
+            <td>{{request.user.last_name}}</td>
+            <td><button class="edit-btn" id="show_button_lastname">Edit</button></td>
+
+            <dialog id="lastname_dialog">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input   type="text" name="lastname" id="lastname" >
+                    <input type="hidden" name="last_name">
+                    <input type="submit" value="تأكيد" class="edit-btn">
+                </form>
+                <button id="close_button_lastname">اغلاق</button>
+            </dialog>
+
+        </tr>
+
+       
         <tr>
             <td>Phone Number</td>
             <td>{{request.user.profile.phone_number}}</td>
@@ -75,7 +93,7 @@
                     <input type="hidden" name="phone">
                     <input type="submit" value="تأكيد" class="edit-btn">
                 </form>
-                <button id="close_button_phone">close</button>
+                <button id="close_button_phone">اغلاق</button>
             </dialog>
 
 
@@ -91,10 +109,23 @@
                     <input type="hidden" name="birth_date">
                     <input type="submit" value="تأكيد" class="edit-btn">
                 </form>
-                <button id="close_button_birth">close</button>
+                <button id="close_button_birth">اغلاق</button>
             </dialog>
 
             <td><button class="edit-btn" id="show_button_birth">Edit</button></td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{request.user.email}}</td>
+
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>username</td>
+            <td>{{request.user.username}}</td>
+            <td></td>
+
         </tr>
         <!-- Add more rows as needed -->
     </table>
@@ -112,7 +143,7 @@
             image_dialog.close();
         })
 
-        //username edit
+        //firstname edit
         const username_dialog=document.getElementById("username_dialog")
         const show_button_username=document.getElementById("show_button_username")
         const close_button_username=document.getElementById("close_button_username")
@@ -121,6 +152,16 @@
         })
         close_button_username.addEventListener("click",function(){
             username_dialog.close();
+        })
+        //firstname edit
+        const lastname_dialog=document.getElementById("lastname_dialog")
+        const show_button_lastname=document.getElementById("show_button_lastname")
+        const close_button_lastname=document.getElementById("close_button_lastname")
+        show_button_lastname.addEventListener("click",function(){
+            lastname_dialog.showModal();
+        })
+        close_button_lastname.addEventListener("click",function(){
+            lastname_dialog.close();
         })
         //phone
         const phone_dialog=document.getElementById("phone_dialog")

@@ -10,8 +10,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
   />
-  
- 
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"   href="{% static 'css/normal.css' %}">
     <link rel="stylesheet"  href="{% static 'css/style.css' %}">
@@ -30,6 +29,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Arimo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 
+
+  <!-- website icon-->
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'source/images/MainLogo.png' %}" />
+ 
 
     <title>{% block title %} {% endblock %} </title>
 </head>
@@ -63,7 +66,8 @@
                         </li>
                        
                         <li>
-                          <a href="{% url 'base_chat' %}">رسائل</a>
+                            <!--  {% url 'base_chat' %} -->
+                          <a href="{% url 'emails_list' %}">رسائل</a>
                         </li>
                       
                        
@@ -136,22 +140,22 @@
 
             <div class="part_item news">
                
-               <a href="https://www.google.com"> <span>رابط المنشور</span></a>
+               <a href="{% url 'report' 1 %}"> <span>رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             <div class="part_item news">
                 
-             <a href="https://www.google.com"> <span>رابط المنشور</span></a>
+             <a href="{% url 'report' 2 %}"> <span>رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             <div class="part_item news">
                 
-              <a href="https://www.google.com">  <span> رابط المنشور</span></a>
+              <a href="{% url 'report' 2 %}">  <span> رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             <div class="part_item news">
               
-               <a href="https://www.google.com"><span>رابط المنشور</span></a>
+               <a href="{% url 'report' 4 %}"><span>رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
          
@@ -173,22 +177,22 @@
 
             <div class="part_item news">
                
-               <a href="https://www.google.com"><span>رابط المنشور</span></a>
+               <a href="https://fb.watch/rXO-4PC_m1/"><span>رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             <div class="part_item news">
                 
-                <a href="https://www.google.com"><span>رابط المنشور</span></a>
+                <a href="https://www.facebook.com/NHCOH/posts/pfbid02D9YFFEDvdYqxpowC232cKgUX8dmVEMz8tn5scsYgaM6NLH7BfcDRDuvwGMSzgxDCl"><span>رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             <div class="part_item news">
                 
-                <a href="https://www.google.com">  <span> رابط المنشور</span></a>
+                <a href="https://fb.watch/rXP1V_XAU3/">  <span> رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             <div class="part_item news">
               
-                <a href="https://www.google.com"> <span>رابط المنشور</span></a>
+                <a href="https://www.facebook.com/NHCOH/posts/pfbid02ERhAAqgtzgh5bSAdavmohriTV8ux4a4Z4kYJ2MNmz2dgg34DJZRoHYA7BgzYR8FPl"> <span>رابط المنشور</span></a>
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
          
@@ -202,22 +206,23 @@
             <div style="margin-top:10px"></div>
             <div class="part_item info" >
                
-                <span>9-999-999-9999</span>
+                <span>+964 0000000000</span>
                 <i class="fa fa-phone" aria-hidden="true"></i>
             </div>
             <div class="part_item info">
                 
-                <span>9-999-999-9999</span>
+                <span>+964 0000000000</span>
                 <i class="fa fa-phone" aria-hidden="true"></i>
             </div>
             <div class="part_item info">
                 
-                <span> كيف تصل الينا</span>
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
+               
+               <a href="https://www.google.com/maps/place/Nassiriya+Heart+Center/@31.080889,46.2476,10z/data=!4m6!3m5!1s0x3fddfce278fda60b:0x9e70920fe98fac40!8m2!3d31.0808892!4d46.2476004!16s%2Fm%2F012vtx21?hl=en-GB&entry=ttu"> <span> كيف تصل الينا</span> </a> 
+               <i class="fa fa-map-marker" aria-hidden="true"></i>
             </div>
             <div class="part_item info">
-              
-                <span>hospital@gmail.com</span>
+                <a href="mailto:info@nassiryaheart.com"> <span>info@nassiryaheart.com </span></a>
+               
                 <i class="fa fa-envelope" aria-hidden="true"></i>
             </div>
          
@@ -227,19 +232,17 @@
     </div>
     <div class="social_media">
        
-        <a class="social_media_icon" href="www.facebock.com"> 
+        <a class="social_media_icon" href="https://www.facebook.com/NHCOH"> 
             <i class="fa fa-facebook-official" aria-hidden="true"></i>
         </a>
       
-        <a class="social_media_icon" href="www.facebock.com"> 
+        <a class="social_media_icon" href="https://www.instagram.com/nasiryahearthospital?utm_source=ig_web_button_share_sheet&igsh=OGQ5ZDc2ODk2ZA=="> 
             <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
       
-        <a class="social_media_icon" href="www.facebock.com"> 
-            <i class="fa fa-telegram" aria-hidden="true"></i>
-        </a>
+     
 
-        <a class="social_media_icon" href="www.facebock.com"> 
+        <a class="social_media_icon" href="https://www.youtube.com/@NasiryaHeartHospital"> 
             <i class="fa fa-youtube-play" aria-hidden="true"></i>
 
         </a>

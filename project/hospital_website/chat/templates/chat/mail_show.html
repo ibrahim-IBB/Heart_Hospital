@@ -1,0 +1,48 @@
+
+    
+
+    
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Email {% endblock %}
+
+
+{% block css_link %}
+<style>
+
+    .mail_wrapper{
+      margin: 30px;
+        border:1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    .center_item{
+        margin: 5px;
+    }
+   
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="empty_fixer-mid"></div>
+{% if reply_link %}
+<div class="center_item"><a href="{% url 'mail_form' mail.user.username %}">reply</a></div>
+
+{% endif %}
+<div class="center_item"><h3>sent by : <b>{{mail.user.email}}</b></h3></div>
+<div class="center_item"><h3>sent to : <b>{{mail.email_reply}}</b></h3></div>
+<div class="center_item"><h3>subject  : <b>{{mail.subject}}</b></h3></div>
+<div class="center_item"><h3><b>email content:</b></h3></div>
+<div class="mail_wrapper">
+    {{ mail.email_body|safe }}
+</div>
+
+<div class="empty_fixer-mid"></div>
+
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}

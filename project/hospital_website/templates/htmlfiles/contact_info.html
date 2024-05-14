@@ -2,6 +2,66 @@
 {% load static %}
 {% block title %} معلومات التواصل  {% endblock %}
 
+{% block css_link %}
+<style>
+/* styles.css */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center; /* Center cards horizontally */
+    align-items: start; /* Align cards to the start of the container vertically */
+}
+.card-container-1{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    justify-content: center; /* Center cards horizontally */
+    align-items: start; /* Align cards to the start of the container vertically */
+}
+.card-container-2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center; /* Center cards horizontally */
+    align-items: start; /* Align cards to the start of the container vertically */
+}
+.card {
+    display: flex; /* Use flexbox to align children */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    text-align: center; /* Center text */
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.card img {
+    width: 100px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height to maintain a 1:1 aspect ratio */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    margin-bottom: 10px; /* Optional: space between the image and the text below */
+}
+
+
+
+@media (max-width: 900px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+</style>
+{% endblock %}
 {% block content %}
 <div class="main_subject">
 
@@ -9,8 +69,7 @@
     <div class="report_content">
         <div class="subject_title"> معلومات التواصل </div>
     
-      
-        <div class="text_item"></div>
+        <div class="empty_fixer"></div>
 
         <div class="multi_image_item" >
             <img src="{% static 'source/images/background.jpg' %}" style="margin: 10px;" alt="">
@@ -18,11 +77,67 @@
             <img src="{% static 'source/images/background.jpg' %}" style="margin: 10px;" alt="">
         </div>
      
+        <div class="empty_fixer"></div>
+        
+        <div class="text_item">بعض الاطباء للتواصل معهم</div>
 
 
       
-                                                   
+        <div class="card-container">
+
+
+            {% for doctor in doctors %}
+            <div class="card">
+                <img src="{{doctor.image.url}}" onerror="this.onerror=null;this.src='/default.png/'" />
+                <h2>{{doctor.first_name }} &nbsp; {{doctor.last_name}}</h2>
+                <p>{{doctor.job_title}}</p>
+                <p>Phone: {{doctor.number}}</p>
+            </div>
+            {% endfor %}
+      
+    
         
+       
+       
+        </div>
+                                                   
+        <div class="text_item">ابحث عن طبيب </div>
+        
+        <div class="center_item">
+            <form class="search_form" method="GET"  action="." >
+                <input  class="search_input" type="text" name="doctor" style="background-color: #5371ff;"  >
+                <button class="search_submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
+                <!-- <div class="line"></div> -->
+            </form>
+        </div>
+
+        {% if searched_doctors %}
+        {% if searched_doctors.count == 2 %}
+        <div class="card-container-2">
+            {% elif searched_doctors.count == 1 %}
+            <div class="card-container-1">
+            {% else %}
+            <div class="card-container">
+            {% endif %}
+        {% for doctor in searched_doctors %}
+        <div class="card">
+            <img src="{{doctor.image.url}}" onerror="this.onerror=null;this.src='/default.png/'" />
+            <h2>{{doctor.first_name }} &nbsp; {{doctor.last_name}}</h2>
+            <p>{{doctor.job_title}}</p>
+            <p>Phone: {{doctor.number}}</p>
+        </div>
+        {% endfor %}
+    </div>
+        {% endif %}
+
+     
+
+        <div class="empty_fixer"></div>
+        <div class="empty_fixer"></div>
+        <div class="empty_fixer"></div>
+        <div class="center_item">
+            <a href="{% url 'mail_form' %}" style="font-size: 22px;">ارسل رسالى الى المستشفى</a>
+        </div>
     </div>
   
 
@@ -34,7 +149,16 @@
 
 <!-- end subject -->
 
+<!-- script to keep scroll position after reload page -->
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
 
-
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
 
 {% endblock %}

@@ -1,18 +1,90 @@
-<h1>{{subject.title}}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>remove</title>
 
-
-
-<form action="" method="post">
-    {% csrf_token %}
-
-    <select name="free_subjects" multiple>
-        {% for sub in all_children %}  
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
         
-        <option value="{{sub.id}}">{{sub.title}}</option>
+        h1 {
+            color: #333;
+            text-align: center;
+        }
         
-        {% endfor %}
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Added to include padding in the width */
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #337ab7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #23527c;
+        }
+        </style>
+</head>
+<body>
+    <h1>{{subject.title}}</h1>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <select name="free_subjects" multiple>
+            {% for sub in all_children %}  
+            <option value="{{sub.id}}">{{sub.title}}</option>
+            {% endfor %}
         </select>
-
         <input type="submit" value="remove">
-</form>
-<a href="/subject_list/">Subjects List</a>
+    </form>
+    
+    <a href="/subject_list/">Subjects List</a>
+    <a href="{% url 'admin:index' %}">admin site</a>
+
+</body>
+</html>
+
+
+
+    
+  

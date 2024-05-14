@@ -135,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "ar"#'en-us'
+LANGUAGE_CODE = "en-us"#'en-us'
 
 TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Baghdad'
@@ -172,8 +172,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True 
 DEFAULT_FROM_EMAIL = "Heart Hospital" 
-EMAIL_HOST_USER =  "codibsod500@gmail.com"
-EMAIL_HOST_PASSWORD = "hemb hdln hwdh zfdk"
+EMAIL_HOST_USER =  "hospital@gmail.com" #email
+EMAIL_HOST_PASSWORD = "hemb hdln hwdh zfdk"#password
 
 
 
@@ -198,3 +198,9 @@ CKEDITOR_CONFIGS = {
         ),
     }
 }
+
+
+
+# extra settings
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
